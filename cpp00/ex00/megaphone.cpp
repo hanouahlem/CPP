@@ -17,7 +17,8 @@ int main(int ac, char **av)
             }
             i++;
         }
+        return(0);
     }
     std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-    
+    return(0);
 }
