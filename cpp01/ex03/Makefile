@@ -1,9 +1,10 @@
-NAME	= 	Zombie
+NAME	=  weapon
 
 SRCS 	=	main.cpp \
-			Zombie.cpp \
-			zombieHorde.cpp \
-
+			HumanA.cpp \
+			HumanB.cpp \
+			Weapon.cpp 
+			
 CC		=	c++
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98

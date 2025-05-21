@@ -8,5 +8,4 @@ Zombie::Zombie(std::string name)
 Zombie::~Zombie()
 {
     std::cout << "Zombie destructor : " << _name << std::endl;
-
 }

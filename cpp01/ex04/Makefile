@@ -1,9 +1,7 @@
-NAME	= 	Zombie
+NAME	=  remplace
 
 SRCS 	=	main.cpp \
-			Zombie.cpp \
-			zombieHorde.cpp \
-
+			
 CC		=	c++
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98
