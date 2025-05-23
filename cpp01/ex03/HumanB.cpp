@@ -19,7 +19,7 @@ void HumanB::setWeapon(Weapon &newValue)
 void HumanB::attack()
 {
     if(_weapon)
-        std::cout << _nameB <<  " attacks with their " << _weapon->getweapon() << std::endl;
+        std::cout << _nameB <<  " attacks with their " << _weapon->getType() << std::endl;
     else
-        std::cout << _nameB << " cannot attack without a weapon !! " << std::endl;
+        std::cout << _nameB << " attack without a weapon but one has fists !! " << std::endl;
 }

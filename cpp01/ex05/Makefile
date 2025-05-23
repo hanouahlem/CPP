@@ -1,10 +1,8 @@
-NAME	= 	Zombie
+NAME	=  Harl
 
 SRCS 	=	main.cpp \
-			newZombie.cpp \
-			randomChump.cpp \
-			Zombie.cpp
-
+			Harl.cpp 
+			
 CC		=	c++
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98

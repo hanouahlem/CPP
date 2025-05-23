@@ -1,4 +1,4 @@
-NAME	=  remplace
+NAME	=  Programme
 
 SRCS 	=	main.cpp \
 			
