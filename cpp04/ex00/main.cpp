@@ -19,6 +19,7 @@ int main()
    
     std::cout << std::endl;
     std::cout << std::endl;
+    
     //Wrong class
     WrongAnimal* animal = new WrongAnimal();
     WrongAnimal* cat = new WrongCat();

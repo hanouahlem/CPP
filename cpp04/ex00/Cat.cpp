@@ -3,6 +3,7 @@
 Cat::Cat()
 {
     std::cout << "Cat Default constructor called" << std::endl;
+    this->_type = "Cat";
 }
 Cat::Cat(const Cat &other)
 {
