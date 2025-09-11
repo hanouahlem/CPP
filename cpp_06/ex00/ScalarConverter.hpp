@@ -2,6 +2,11 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <iomanip>
+#include <cctype>
+#include <cstdlib>
+#include <exception>
+#include <string>
 
 class ScalarConverter
 {
@@ -14,5 +19,4 @@ class ScalarConverter
     public :
                 static void  convert(std::string literal);
 };
-
 #endif
