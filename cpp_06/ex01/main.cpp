@@ -1,9 +1,10 @@
 #include "Serialize.hpp"
 
-int main() {
+int main() 
+{
     Data data = {42, "hello"};
-    uintptr_t raw = Serializer::serialize(&data);
-    Data* ptr = Serializer::deserialize(raw);
+    uintptr_t raw = Serialize::serialize(&data);
+    Data* ptr = Serialize::deserialize(raw);
 
     // Vérification
     if (ptr == &data)

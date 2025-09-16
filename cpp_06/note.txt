@@ -1,0 +1,38 @@
+
+
+les casts ::
+
+
+il y a 5 types de cast : 
+
+1 - static_cast :   Effectue des conversions de type au moment
+                    de la compilation entre les types associés.
+
+
+2 - dynamic_cast :  Effectue des conversions de type d'exécution 
+                    sur des pointeurs ou des références dans une
+                    hiérarchie polymorphe (héritage)
+
+
+3 - const_cast :    Ajoute ou supprime const
+
+
+4 - reinterpret_cast : Réinterprète la représentation au niveau 
+                       du bit d'un type comme s'il s'agissait 
+                       d'un autre type
+
+
+5 - C-style casts :     Exécute une combinaison de trois cast differents
+
+Mais nous on va plus utiliser les deux premiers :
+
+static_cast 
+dynamic_cast 
+Dynamic_cast<A*>(p) retourne un pointeur non nul si le cast est possible, sinon nullptr.
+
+
+Quelle est la différence entre la conversion de type implicite et explicite ?
+
+Implicite : Le compilateur fait la conversion tout seul, sans que tu le demandes
+Explicite : Tu demandes la conversion de manière volontaire dans ton code (avec un cast)
+
