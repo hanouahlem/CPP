@@ -5,8 +5,7 @@ int main()
     Data data = {42, "hello"};
     uintptr_t raw = Serialize::serialize(&data);
     Data* ptr = Serialize::deserialize(raw);
-
-    // Vérification
+    // Data* ptr = Serialize::deserialize(raw + 1); Verifier erreur
     if (ptr == &data)
         std::cout << "C'est le même pointeur, ça marche !" << std::endl;
     else
