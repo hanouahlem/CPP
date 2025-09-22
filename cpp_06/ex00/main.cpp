@@ -10,7 +10,7 @@ int main(int ac, char **av)
 		return (1);
 	}
 	str = av[1];
-	std::cout << std::fixed << std::setprecision(1);
+	// std::cout << std::fixed << std::setprecision(1);
 	ScalarConverter::convert(str);
 	return (0);
 }

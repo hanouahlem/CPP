@@ -7,6 +7,11 @@
 #include <cstdlib>
 #include <exception>
 #include <string>
+#include <limits.h>
+#include <limits>
+
+
+
 
 class ScalarConverter
 {

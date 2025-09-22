@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include <cmath>
 
 ScalarConverter::ScalarConverter()
 {
@@ -15,12 +16,12 @@ ScalarConverter::ScalarConverter(ScalarConverter const &other)
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
 {
     (void)other;
-    return(*this);
+    return (*this);
 }
 
 void ScalarConverter::convert(std::string literal)
 {
-    int resultInt = 0;
+    // int resultInt = 0;
     float resultFloat = 0;
     double resultDouble = 0;
     char resultChar = 0;
@@ -30,42 +31,66 @@ void ScalarConverter::convert(std::string literal)
         std::cout << "Error: Empty string" << std::endl;
         return;
     }
-    for(int i = 0; (size_t)i < literal.length(); i++)
-	{
-		if (!std::isdigit(literal[i]) && !std::isdigit(literal[i + 1]) && literal[i] != '.' && literal[i] != 'f')
-		{
+    for (int i = 0; (size_t)i < literal.length(); i++)
+    {
+        if (literal.length() == 1 && !std::isdigit(literal[0]))
+        {
+            char c = literal[0];
+            std::cout << "char: '" << c << "'" << std::endl;
+            std::cout << "int: " << static_cast<int>(c) << std::endl;
+            std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
+            std::cout << "double: " << static_cast<double>(c) << std::endl;
+            return;
+        }
+        if (!std::isdigit(literal[i]) && !std::isdigit(literal[i + 1]) && literal[i] != '.' && literal[i] != 'f')
+        {
             std::cout << "int : impossible" << std::endl;
             std::cout << "char : impossible" << std::endl;
             if (literal == "nan" || literal == "nanf")
- 				std::cout << "float : nanf" << std::endl;
- 			else if (literal == "-inf" || literal == "+inf"
- 				|| literal == "-inff" || literal == "+inff")
- 				std::cout << "float : " << literal[0] << "inff" << std::endl;
+                std::cout << "float : nanf" << std::endl;
+            else if (literal == "-inf" || literal == "+inf" || literal == "-inff" || literal == "+inff")
+                    std::cout << "float : " << literal[0] << "inff" << std::endl;
+            else if (literal == "inf" || literal == "inff")
+                    std::cout << "float : inff" << std::endl;
             else
- 				std::cout << "float : impossible" << std::endl;
+                std::cout << "float : impossible" << std::endl;
 
             if (literal == "nan" || literal == "nanf")
                 std::cout << "double : nan" << std::endl;
-            else if(literal == "-inf" || literal == "+inf"
- 				|| literal == "-inff" || literal == "+inff")
-             	std::cout << "double : " << literal[0] << "inf" << std::endl;
+            else if (literal == "-inf" || literal == "+inf"  || literal == "-inff" || literal == "+inff")
+                std::cout << "double : " << literal[0] << "inf" << std::endl;
+            else if (literal == "inf" || literal == "inff")
+                    std::cout << "double : inf" << std::endl;
             else
- 				std::cout << "double : impossible" << std::endl;
+                std::cout << "double : impossible" << std::endl;
             return;
         }
     }
 
+    
+    
     // INT
     try
     {
-        resultInt = std::atoi(literal.c_str());
-        std::cout << "int : " << resultInt << std::endl;
-    } 
-    catch (std::exception &e) 
+        char *end;
+        long result = std::strtol(literal.c_str(), &end, 10);
+
+        // Vérifie que toute la chaîne a été convertie et que la valeur est dans les bornes d'un int
+        if (result > INT_MAX || result < INT_MIN)
+        {
+            std::cout << "int : impossible" << std::endl;
+        }
+        else
+        {
+            std::cout << "int : " << static_cast<int>(result) << std::endl;
+        }
+    }
+    
+    catch (std::exception &e)
     {
         std::cout << "int : impossible" << std::endl;
     }
-    
+
     // CHAR
     try
     {
@@ -74,31 +99,31 @@ void ScalarConverter::convert(std::string literal)
             std::cout << "char : '" << resultChar << "'" << std::endl;
         else
             std::cout << "char : Non displayable" << std::endl;
-    } 
-    catch (std::exception &e) 
+    }
+    catch (std::exception &e)
     {
         std::cout << "char : impossible" << std::endl;
     }
 
     // FLOAT
-        try 
-        {
-            resultFloat = std::atof(literal.c_str());
-            std::cout << "float : " << resultFloat << "f" << std::endl;
-        } 
-        catch (std::exception &e) 
-        {
-            std::cout << "float : impossible" << std::endl;
-        }
+    try
+    {
+        resultFloat = (std::atof(literal.c_str()));
+        std::cout << "float : " << resultFloat << ".0f" << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "float : impossible" << std::endl;
+    }
 
-        // DOUBLE
-        try 
-        {
-            resultDouble = std::atof(literal.c_str());
-            std::cout << "double : " << resultDouble << std::endl;
-        } 
-        catch (std::exception &e)
-        {
-                std::cout << "double : impossible" << std::endl;
-        }
+    // DOUBLE
+    try
+    {
+        resultDouble = (std::atof(literal.c_str()));
+        std::cout << "double : " << resultDouble << ".0" << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "double : impossible" << std::endl;
+    }
 }
