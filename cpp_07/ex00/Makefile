@@ -1,7 +1,6 @@
-NAME	= 	
+NAME	= 	whatever
 
 SRCS 	=	main.cpp \
-			.cpp
 
 CC		=	c++
 

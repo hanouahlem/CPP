@@ -1,7 +1,6 @@
-NAME	= 	
+NAME	=   Iter
 
 SRCS 	=	main.cpp \
-			.cpp
 
 CC		=	c++
 
