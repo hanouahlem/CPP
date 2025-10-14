@@ -1,18 +1,18 @@
 #include "Span.hpp"
 
-Span::Span() : _nbrMax(0)
+Span::Span() : _N(0)
 {
     // std::cout << "Constructor Span has called" << std::endl;
 }
 
 
-Span::Span(unsigned int N) : _nbrMax(N)
+Span::Span(unsigned int N) : _N(N)
 {
     // std::cout << "Constructor Span has called" << std::endl;
 }
 
 
-Span::Span(const Span &other) : _nbrMax(other._nbrMax), _number(other._number)
+Span::Span(const Span &other) : _N(other._N), _number(other._number)
 {
 }
 
@@ -20,7 +20,7 @@ Span &Span::operator=(const Span &other)
 {
     if(this != &other)
     {
-        _nbrMax = other._nbrMax;
+        _N = other._N;
         _number = other._number;
     }
     return(*this);
@@ -34,7 +34,7 @@ Span::~Span()
 
 void Span::addNumber(int number)
 {
-    if(_number.size() >= _nbrMax)
+    if(_number.size() >= _N)
         throw spanIsFull();
     _number.push_back(number);
 }
@@ -71,19 +71,5 @@ int Span::longestSpan() const
         throw NoSpanClac();
     int min = *std::min_element(_number.begin(), _number.end());
     int max = *std::max_element(_number.begin(), _number.end());
-    return max - min;
+    return (max - min);
 }
-
-
-Span::AddMoreNumber()
-
-
-//    template<typename Iterator>
-//     void addRange(Iterator begin, Iterator end) {
-//         while (begin != end) {
-//             if (_numbers.size() >= _maxSize)
-//                 throw SpanFullException();
-//             _numbers.push_back(*begin);
-//             ++begin;
-//         }
-//     }
