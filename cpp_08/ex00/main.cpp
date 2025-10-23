@@ -15,7 +15,9 @@ int main() {
     
     try {
         std::vector<int>::iterator index = easyfind(vec, 10);
-        std::cout << "Trouvé: " << *index << std::endl;
+        std::cout << "Trouvé: " << *index << " Index: " << std::distance(vec.begin(), index)<< std::endl;
+
+        
     } catch (const std::exception& e) {
         std::cout << "Erreur: " << e.what() << std::endl;
     }
@@ -23,7 +25,7 @@ int main() {
 
     try {
         std::vector<int>::iterator index = easyfind(vec, 15);
-        std::cout << "Trouvé: " << *index << std::endl;
+        std::cout << "Trouvé: " << *index << " Index: " << std::distance(vec.begin(), index)<< std::endl;
     } catch (const std::exception& e) {
         std::cout << "Erreur: " << e.what() << std::endl;
     }

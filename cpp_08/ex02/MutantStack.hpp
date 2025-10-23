@@ -7,17 +7,10 @@
 template<typename T>
 class MutantStack : public std::stack<T>
 {
-    private :
-    
     public :
-            MutantStack()
-            {}
-            ~MutantStack()
-            {}
-            MutantStack(const MutantStack &other)
-            {
-                std::stack<T>(other);
-            }
+            MutantStack(){};
+            ~MutantStack(){};
+            MutantStack(const MutantStack &other) : std::stack<T>(other){};
             MutantStack &operator=(const MutantStack &other)
             {
                 std::stack<T>::operator=(other);
@@ -27,17 +20,12 @@ class MutantStack : public std::stack<T>
             typedef typename std::stack<T>::container_type::iterator iterator;
             typedef typename std::stack<T>::container_type::const_iterator const_iterator;
               
-            iterator begin()
+            typename std::stack<T>::container_type::iterator begin()
             {
-                return this->c.begin();
+                return (this->c.begin());
             }
-            iterator end()
+            typename std::stack<T>::container_type::iterator end()
             {
-                return this->c.end();
+                return (this->c.end());
             }
-        };
-// if (elements.empty()) {
-// throw std::out_of_range("Stack is empty!");
-
-
-
+};
