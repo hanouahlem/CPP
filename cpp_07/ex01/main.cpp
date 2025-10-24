@@ -1,30 +1,35 @@
 #include "iter.hpp"
 
-void print_char(int a)
+template <typename T>
+void    print(T& c)
 {
-    std::cout << a << std::endl;
+    std::cout << c << std::endl;
 }
 
-void print_str(std::string a)
+template <typename T>
+void    print_const(const T& c)
 {
-    std::cout << a << std::endl;
+    std::cout << c << std::endl;
 }
-void print_float(float a)
+int    main(void)
 {
-    std::cout << a << std::endl;
-}
-
-int main()
-{
-    int tab[3] = {10, 15, 22};
-    std::string str[3] = {"un", "deux", "trois"};
-    float flt[3] = {10.25, 15.15, 22.22};
-
-    std::cout << "mon tableau de int :" << std::endl;
-    iter(tab, 3, print_char);
+    std::string tab1[3] = { "Un ","deux", "trois"};
     std::cout << "mon tableau de string :" << std::endl;
-    iter(str, 3, print_str);
-    std::cout << "mon tableau de float :" << std::endl;
-    iter(flt, 3, print_float);
+    iter(tab1, 3, print<std::string>);
+
+    int tab2[5] = {0, 1, 2, 3, 4};
+    std::cout << "mon tableau de int :" << std::endl;
+    iter(tab2, 5, print<int>);
+
+    std::cout << std::endl;
+
+    const std::string tab_const[4] = { "Quatre ","Cinq", "Six","sept"};
+    std::cout << "mon tableau de string const:" << std::endl;
+    iter(tab_const, 4, print_const<std::string>);
+
+    const int tab_const2[5] = {5, 6, 7, 8, 9};
+    std::cout << "mon tableau de int const:" << std::endl;
+    iter(tab_const2, 5, print_const<int>);
+
     return 0;
 }

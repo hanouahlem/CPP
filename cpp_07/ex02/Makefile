@@ -1,7 +1,6 @@
-NAME	= 	
+NAME	= 	Array
 
 SRCS 	=	main.cpp \
-			.cpp
 
 CC		=	c++
 

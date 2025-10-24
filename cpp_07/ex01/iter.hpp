@@ -4,12 +4,14 @@
 #include <string>
 
 
-template <typename T, typename M>
+template <typename T, typename f>
 
-void iter(T *tab, int len, M *cmd)
+void iter(T *tab, int len, f function)
 {
+    if(!tab)
+        return;
     for (int i = 0; i < len; i++)
     {
-        cmd(tab[i]);
+        function(tab[i]);
     }
 }
