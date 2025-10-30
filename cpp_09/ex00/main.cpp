@@ -1,15 +1,15 @@
 #include "BitcoinExchange.hpp"
 
 
-
 int main(int ac, char **av)
 {
+    BitcoinExchange btc;
     if(ac != 2)
     {
         std::cout << "Usage: ./btc [File]" << std::endl;
         return 1;
     }
-    
+    btc.loadDatabase(av[1]);
     return 0;
 }
 
