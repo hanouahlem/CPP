@@ -4,6 +4,7 @@
 #include <fstream>
 #include <map>
 #include <string>
+#include <stdlib.h>
 
 class BitcoinExchange
 {

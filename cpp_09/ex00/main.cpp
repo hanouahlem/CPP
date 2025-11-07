@@ -1,6 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-
 int main(int ac, char **av)
 {
     BitcoinExchange btc;
@@ -9,10 +8,10 @@ int main(int ac, char **av)
         std::cout << "Usage: ./btc [File]" << std::endl;
         return 1;
     }
-    btc.loadDatabase(av[1]);
+    btc.loadDatabase("data.csv");
+    btc.processInput(av[1]);
     return 0;
 }
-
 
 
 // Votre programme doit prendre un fichier en argument.
@@ -29,3 +28,8 @@ int main(int ac, char **av)
 // "Error: too large a number." (valeur > 1000)
 // "Error: no exchange rate available for date <date>" (pas de taux antérieur disponible)
 // "Error: could not open file." (fichier introuvable)
+
+
+
+
+
