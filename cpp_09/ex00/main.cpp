@@ -5,7 +5,7 @@ int main(int ac, char **av)
     BitcoinExchange btc;
     if(ac != 2)
     {
-        std::cout << "Usage: ./btc [File]" << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
     btc.loadDatabase("data.csv");

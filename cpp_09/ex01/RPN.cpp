@@ -1,15 +1,18 @@
 #include "RPN.hpp"
 
 
+void printfError(std::string error)
+{
+    std::cout << "Error" << error << std::endl;
+}
+
 static void whichSigne(const std::string& signe, std::stack<double>& stack)
 {
     if (stack.size() < 2)
-        throw std::invalid_argument("Error: Not enough, please make any more number");
+        return(printfError(" "));
 
-    double b = stack.top();
-    stack.pop();
-    double a = stack.top();
-    stack.pop();
+    double b = stack.top() ; stack.pop();
+    double a = stack.top() ; stack.pop();
 
     if (signe == "+")
         stack.push(a + b);
@@ -20,12 +23,12 @@ static void whichSigne(const std::string& signe, std::stack<double>& stack)
     else if (signe == "/")
     {
         if (b == 0)
-            throw std::invalid_argument("Error: Division by zero is not possible");
+            return;
         stack.push(a / b);
     }
 }
 
-double RPN::calculator(std::string input)
+void RPN::calculator(std::string input)
 {
     std::stack<double> stack;
     std::string c;
@@ -39,11 +42,18 @@ double RPN::calculator(std::string input)
         if(c >= "0" && c <= "9")
         {
             if(val > 10)
-                throw std::invalid_argument("Error: Number is bigger than 10");
+                return(printfError(": Number is bigger than 10"));
             stack.push(val);
         }
         else if (c == "+" || c == "-" || c == "*" || c == "/")
             whichSigne(c, stack);
+        else
+        {
+            return(printfError(": Invalid character in expression"));
+        }
     }
-    return stack.top();
+    if (stack.size() != 1)
+        return(printfError(": Invalid RPN expression"));
+    
+    std::cout << stack.top() << std::endl;
 }

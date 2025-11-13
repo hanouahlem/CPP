@@ -9,4 +9,7 @@ int main(int ac, char **av)
     }
     RPN stack;
     stack.calculator(av[1]);
+ 
+    return(0);
+    
 }

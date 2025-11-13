@@ -9,6 +9,6 @@
 class RPN
 {
     public :
-        double calculator(std::string number);
+        void calculator(std::string number);
 
 };

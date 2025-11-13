@@ -18,8 +18,8 @@ static std::string trim(const std::string& line) {
 }
 
 bool isValidDate(const std::string& date) {
-    struct tm tm;
-    return strptime(date.c_str(), "%Y-%m-%d", &tm) != NULL;
+    struct tm time;
+    return strptime(date.c_str(), "%Y-%m-%d", &time) != NULL;
 }
 
 bool BitcoinExchange::loadDatabase(const std::string& filename)
@@ -47,17 +47,12 @@ bool BitcoinExchange::loadDatabase(const std::string& filename)
         if (date == "date" || rateStr == "exchange_rate")
             continue;
 
-        if (!isValidDate(date))
-        {
-            std::cerr << "Error: Invalid date format => " << date << std::endl;
-            return false;
-        }
         std::string skipSpaces;
         for (std::size_t i = 0; i < date.size(); ++i)
         {
             unsigned char c = static_cast<unsigned char>(date[i]);
             if (!std::isspace(c))
-                skipSpaces += date[i];
+            skipSpaces += date[i];
         }
         date = skipSpaces;
         if (date.empty())
@@ -65,7 +60,6 @@ bool BitcoinExchange::loadDatabase(const std::string& filename)
         float rate = std::atof(rateStr.c_str());
         _rates[date] = rate;
         anyLoad = true;
-        // std::cout << date << " | " << _rates[date] << std::endl;
     }
     if (!anyLoad) 
     {
@@ -78,22 +72,19 @@ bool BitcoinExchange::loadDatabase(const std::string& filename)
 
 void BitcoinExchange::processInput(const std::string& filename) const
 {
-    // On utilise filename pour éviter l'erreur -Werror,-Wunused-parameter
     std::ifstream file(filename.c_str());
     if (!file.is_open())
     {
         std::cout << "Error: could not open file '" << filename << "' dans processInput." << std::endl;
         return;
     }
-
     
-    // parsing et valider de 'date' et 'value'
     if (_rates.empty()) 
     { 
         std::cout << "Erreur : empty line " << std::endl; 
         return; 
     }
-
+    
     std::string date;
     std::string line;
     while (std::getline(file, line))
@@ -106,20 +97,27 @@ void BitcoinExchange::processInput(const std::string& filename) const
             std::cout << "Error: bad input => " << line << std::endl;
 			continue;
 		}
-
+        
 		std::string date = line.substr(0, pos);
 		std::string excRates = line.substr(pos + 3);
 		double value = atof(excRates.c_str());
 		
+        if (date == "date" || excRates == "exchange_rate")
+            continue;
+        if (!isValidDate(date))
+        {
+            std::cerr << "Error: Invalid date format => " << date << std::endl;
+            continue;;
+        }
         if (value < 0) {
-			std::cout << "Error: not a positive number." << std::endl;
+            std::cout << "Error: not a positive number." << std::endl;
 			continue;
 		}
 		if (value > 1000) {
-			std::cout << "Error: too large a number." << std::endl;
+            std::cout << "Error: too large a number." << std::endl;
 			continue;
 		}
-
+        
         std::map<std::string,float>::const_iterator mapIter = _rates.find(date);
         if (mapIter == _rates.end())
         {
