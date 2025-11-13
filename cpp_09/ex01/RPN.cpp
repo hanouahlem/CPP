@@ -6,10 +6,10 @@ void printfError(std::string error)
     std::cout << "Error" << error << std::endl;
 }
 
-static void whichSigne(const std::string& signe, std::stack<double>& stack)
+static double whichSigne(const std::string& signe, std::stack<double>& stack)
 {
     if (stack.size() < 2)
-        return(printfError(" "));
+        return(printfError(" "),1);
 
     double b = stack.top() ; stack.pop();
     double a = stack.top() ; stack.pop();
@@ -23,12 +23,13 @@ static void whichSigne(const std::string& signe, std::stack<double>& stack)
     else if (signe == "/")
     {
         if (b == 0)
-            return;
+            return(1);
         stack.push(a / b);
     }
+    return(0);
 }
 
-void RPN::calculator(std::string input)
+double RPN::calculator(std::string input)
 {
     std::stack<double> stack;
     std::string c;
@@ -41,19 +42,23 @@ void RPN::calculator(std::string input)
         double val = std::strtod(c.c_str(), NULL);
         if(c >= "0" && c <= "9")
         {
-            if(val > 10)
-                return(printfError(": Number is bigger than 10"));
+            if(val >= 10)
+                return(printfError(": Number is bigger than 9"),1);
             stack.push(val);
         }
         else if (c == "+" || c == "-" || c == "*" || c == "/")
-            whichSigne(c, stack);
+        {
+            if(whichSigne(c, stack))
+                return(1);
+        }
         else
         {
-            return(printfError(": Invalid character in expression"));
+            return(printfError(": Invalid character in expression"),1);
         }
     }
     if (stack.size() != 1)
-        return(printfError(": Invalid RPN expression"));
+        return(printfError(": Invalid RPN expression"),1);
     
-    std::cout << stack.top() << std::endl;
+    std::cout << stack.top() <<  std::fixed << std::setprecision(0) << std::endl;
+    return(0);
 }

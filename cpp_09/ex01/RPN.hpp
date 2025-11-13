@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <stack>
 #include <sstream>
-
+#include <iomanip>
 class RPN
 {
     public :
-        void calculator(std::string number);
+        double calculator(std::string number);
 
 };
