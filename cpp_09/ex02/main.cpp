@@ -10,8 +10,6 @@ int main(int ac, char **av)
     }
     PmergeMe pm;
     pm.parseInput(ac, av);
-    pm.printNumber();
     
-
     return 0;
 }
