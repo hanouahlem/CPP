@@ -10,6 +10,6 @@ int main(int ac, char **av)
     }
     PmergeMe pm;
     pm.parseInput(ac, av);
-    
+    pm.vectorPrgm();
     return 0;
 }

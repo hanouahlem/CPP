@@ -8,6 +8,7 @@
 #include <climits>  
 #include <cctype>    
 #include <algorithm>
+#include <utility>
 class PmergeMe
 {
     private :
@@ -19,4 +20,13 @@ class PmergeMe
             int isValidNumber(const std::string &str);
             int pushIfGood(double resConvert);
             void printNumber();
+
+            void PrintVec();
+            void vectorPrgm();
+            void SortFourVec(std::vector<int> &vector, int start, int end);
+            void MakePairsVec(std::vector<std::pair<int, int> > &myPairs);
+            void SortPairsVec(std::vector<std::pair<int, int> >& VecPairs, int start, int end);
+            void SortPairsMaxMin(std::vector<std::pair<int, int> >& myPairs,int start, int end);
+
+
 };
