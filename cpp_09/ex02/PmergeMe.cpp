@@ -82,15 +82,22 @@ void PmergeMe::MakePairsVec(std::vector<std::pair<int, int> > &VecPairs)
     {
         int a = _vector[i];
         int b = _vector[k];
-
-        if (a < b) 
+         if (a < b) {
             VecPairs.push_back(std::make_pair(b, a));
-        else 
+            std::cout << "pair indices (" << i << "," << k << ") : (" << b << "," << a << ")" << std::endl;
+        } else {
             VecPairs.push_back(std::make_pair(a, b));
+            std::cout << "pair indices (" << i << "," << k << ") : (" << a << "," << b << ")" << std::endl;
+        }
+        // if (a < b) 
+        //     VecPairs.push_back(std::make_pair(b, a));
+        // else 
+        //     VecPairs.push_back(std::make_pair(a, b));
         i = i + 2;
         k = k + 2;
     }
 }
+
 // tri par insertion, appliqué à des paires et basé uniquement sur la valeur .first
 void PmergeMe::SortPairsMax(std::vector<std::pair<int, int> >& VecPairs,int start, int end)
 {
@@ -214,6 +221,7 @@ void PmergeMe::InitJacobsthal(std::vector<std::pair<int,int> >& VecPairs, std::v
     // remplir VecTab à partir de SeqJacob (en veillant à rester <= n)
     for (size_t i = 0; i < SeqJacob.size(); ++i)
     {
+        //revoir ****************************
         if (SeqJacob[i] <= n)
             VecTab.push_back(SeqJacob[i]);
 
@@ -305,22 +313,22 @@ void PmergeMe::InsertJacob(std::vector<std::pair<int,int> >& VecPairs,std::vecto
 
 int PmergeMe::IfIsSortedVec()
 {
-    for (size_t i = 0; i < _vector.size(); ++i)
+    for (size_t i = 1; i < _vector.size(); ++i)
     {
-        if (_vector[i + 1] > _vector[i]) 
-            return 1;
+        if (_vector[i - 1] > _vector[i]) 
+            return 0;
     }
-    return 0;
+    return 1;
 }
 
 int PmergeMe::IfIsSortedDeque()
 {
-    for (size_t i = 0; i < _deque.size(); ++i)
+    for (size_t i = 1; i < _deque.size(); ++i)
     {
-        if (_deque[i + 1] > _deque[i])
-            return 1;
+        if (_deque[i - 1] > _deque[i])
+            return 0;
     }
-    return 0;
+    return 1;
 }
 
 void PmergeMe::myAlgo()
