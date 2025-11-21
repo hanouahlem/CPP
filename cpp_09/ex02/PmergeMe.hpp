@@ -21,7 +21,7 @@ class PmergeMe
             int pushIfGood(double resConvert);
 
             void PrintVec();
-            void vectorPrgm();
+            void myAlgo();
     
             void MakePairsVec(std::vector<std::pair<int, int> > &myPairs);
             void SortPairsVec(std::vector<std::pair<int, int> >& VecPairs, int start, int end);
@@ -30,6 +30,8 @@ class PmergeMe
             void InitJacobsthal(std::vector<std::pair<int,int> >& VecPairs, std::vector<int>& VecTab);
             void InsertJacob(std::vector<std::pair<int, int> > &VecPairs, std::vector<int>& VecTab);
             int BinarySearch(std::vector<int>& mainChain, int start, int end, int target);
+            int IfIsSortedVec();
+            // void Printchaine();
 
             void MakePairsDeque(std::deque<std::pair<int, int> > &myPairs);
             void SortPairsDeque(std::deque<std::pair<int, int> >& DequePairs, int start, int end);
@@ -38,6 +40,7 @@ class PmergeMe
             void InitJacobsthalDeque(std::deque<std::pair<int,int> >& DequePairs, std::deque<int>& DequeTab);
             void InsertJacobDeque(std::deque<std::pair<int, int> > &DequePairs, std::deque<int>& DequeTab);
             int SearchWereIsertDeque(std::deque<int>& mainChain, int start, int end, int target);
+            int IfIsSortedDeque();
             void PrintDeque();
 
 

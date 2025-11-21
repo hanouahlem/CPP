@@ -5,19 +5,6 @@ void printfError(std::string error)
     std::cout << "Error" << error << std::endl;
 }
 
-// void PmergeMe::printNumber()
-// {
-//     std::cout << "Vector: ";
-//     for (size_t i = 0; i < _vector.size(); ++i)
-//         std::cout << _vector[i] << " ";
-//     std::cout << std::endl;
-
-//     std::cout << "Deque:  ";
-//     for (size_t i = 0; i < _deque.size(); ++i)
-//         std::cout << _deque[i] << " ";
-//     std::cout << std::endl; 
-// }
-
 int PmergeMe::checkInt(long resConvert)
 {
     if (resConvert < 0)
@@ -52,6 +39,7 @@ int PmergeMe::pushIfGood(double resConvert)
     }
     _vector.push_back(static_cast<int>(resConvert));
     _deque.push_back(static_cast<int>(resConvert));
+
     return(0);
 }
 
@@ -95,13 +83,10 @@ void PmergeMe::MakePairsVec(std::vector<std::pair<int, int> > &VecPairs)
         int a = _vector[i];
         int b = _vector[k];
 
-        if (a < b) {
+        if (a < b) 
             VecPairs.push_back(std::make_pair(b, a));
-            // std::cout << "pair indices (" << i << "," << k << ") : (" << b << "," << a << ")" << std::endl;
-        } else {
+        else 
             VecPairs.push_back(std::make_pair(a, b));
-            // std::cout << "pair indices (" << i << "," << k << ") : (" << a << "," << b << ")" << std::endl;
-        }
         i = i + 2;
         k = k + 2;
     }
@@ -318,7 +303,27 @@ void PmergeMe::InsertJacob(std::vector<std::pair<int,int> >& VecPairs,std::vecto
     _vector = FinalVec;
 }
 
-void PmergeMe::vectorPrgm()
+int PmergeMe::IfIsSortedVec()
+{
+    for (size_t i = 0; i < _vector.size(); ++i)
+    {
+        if (_vector[i + 1] > _vector[i]) 
+            return 1;
+    }
+    return 0;
+}
+
+int PmergeMe::IfIsSortedDeque()
+{
+    for (size_t i = 0; i < _deque.size(); ++i)
+    {
+        if (_deque[i + 1] > _deque[i])
+            return 1;
+    }
+    return 0;
+}
+
+void PmergeMe::myAlgo()
 {
     std::vector<std::pair<int, int> > VecPairs;
     std::vector<int> vecTab;
@@ -327,9 +332,9 @@ void PmergeMe::vectorPrgm()
     PrintVec();
 
     clock_t VecTimeToStart = clock();
-    if(_vector.size() == 1)
-        PrintVec();
-    else
+
+    bool vecSorted = IfIsSortedVec();
+    if(!vecSorted && _vector.size() > 1)
     {
         MakePairsVec(VecPairs);
         SortPairsVec(VecPairs, 0, VecPairs.size() - 1); 
@@ -344,9 +349,9 @@ void PmergeMe::vectorPrgm()
 
     std::deque<std::pair<int, int> > DequePairs;
     std::deque<int> DequeTab;
-    if(_deque.size() == 1)
-        return;
-    else
+
+    bool DequeSorted = IfIsSortedDeque();
+    if(!DequeSorted && _deque.size() > 1)
     {
         MakePairsDeque(DequePairs);
         SortPairsDeque(DequePairs, 0, VecPairs.size() - 1); 
@@ -355,18 +360,15 @@ void PmergeMe::vectorPrgm()
     }
     clock_t DequeTimeToEnd = clock();
 
-
-
     std::cout << "After:   ";
     PrintVec();
-    
     double vectorTime = static_cast<double>(VecTimeToEnd - VecTimeToStart) / CLOCKS_PER_SEC * 1000000;
     double dequeTime = static_cast<double>(DequeTimeToEnd - DequeTimeToStart) / CLOCKS_PER_SEC * 1000000;
-
+    
     std::cout << "Time to process a range of " << _vector.size()
-             << " elements with std::vector : " << vectorTime << " us" << std::endl;
+    << " elements with std::vector : " << vectorTime << " us" << std::endl;
     std::cout << "Time to process a range of " << _deque.size()
-               << " elements with std::deque : " << dequeTime << " us" << std::endl;
+    << " elements with std::deque : " << dequeTime << " us" << std::endl;
 }
 
 
@@ -402,13 +404,10 @@ void PmergeMe::MakePairsDeque(std::deque<std::pair<int, int> > &DequePairs)
         int a = _deque[i];
         int b = _deque[k];
 
-        if (a < b) {
+        if (a < b) 
             DequePairs.push_back(std::make_pair(b, a));
-            // std::cout << "pair indices (" << i << "," << k << ") : (" << b << "," << a << ")" << std::endl;
-        } else {
+        else 
             DequePairs.push_back(std::make_pair(a, b));
-            // std::cout << "pair indices (" << i << "," << k << ") : (" << a << "," << b << ")" << std::endl;
-        }
         i = i + 2;
         k = k + 2;
     }
